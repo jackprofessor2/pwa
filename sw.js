@@ -2,7 +2,7 @@ var CACHE_NAME = 'cache-name-v1';
 var urlsToCache = [
   '/pwa/',
   'index.html',
-  'css/styyle.css',
+  'css/style.css',
   'js/scripts.js',
   'manifest.json',
   'images/icons/icon-128x128.png',
