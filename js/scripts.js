@@ -8,4 +8,13 @@ if ('serviceWorker' in navigator) {
         console.log('ServiceWorker registration failed: ', err);
       });
     });
-  }
+}
+
+button = document.getElementById('bluetooth');
+
+/** ações */
+button.addEventListener('pointerup', function(event) {
+    navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+        .then(device => { console.log('Funciona'); })
+        .catch(error => { console.log(error); });
+});
