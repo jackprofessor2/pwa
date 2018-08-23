@@ -9,10 +9,3 @@ if ('serviceWorker' in navigator) {
       });
     });
 }
-
-button = document.getElementById('bluetooth');
-
-/** ações */
-navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
-        .then(device => { console.log('Funciona'); })
-        .catch(error => { console.log(error); });
