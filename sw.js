@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-v1';
+var CACHE_NAME = 'cache-name-v1';
 var urlsToCache = [
   '/pwa/',
   'index.html',
@@ -32,15 +32,34 @@ self.addEventListener('fetch', function(event) {
           if (response) {
             return response;
           }
-          return fetch(event.request);
-        }
-      )
-    );
-});
+  
+          var fetchRequest = event.request.clone();
+  
+          return fetch(fetchRequest).then(
+            function(response) {
+              // Check if we received a valid response
+              if(!response || response.status !== 200 || response.type !== 'basic') {
+                return response;
+              }
+  
+              var responseToCache = response.clone();
+  
+              caches.open(CACHE_NAME)
+                .then(function(cache) {
+                  cache.put(event.request, responseToCache);
+                });
+  
+              return response;
+            }
+          );
+        })
+      );
+  });
+  
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = ['pages-cache-v1', 'teste-cache-v1'];
+    var cacheWhitelist = ['cache-name-v1'];
   
     event.waitUntil(
       caches.keys().then(function(cacheNames) {
@@ -54,11 +73,3 @@ self.addEventListener('activate', function(event) {
       })
     );
 });
-
-/*
-cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
-  return new Request(urlToPrefetch, { mode: 'no-cors' });
-})).then(function() {
-  console.log('All resources have been fetched and cached.');
-});
-*/
