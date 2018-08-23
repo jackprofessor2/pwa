@@ -13,8 +13,6 @@ if ('serviceWorker' in navigator) {
 button = document.getElementById('bluetooth');
 
 /** ações */
-button.addEventListener('pointerup', function(event) {
-    navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
         .then(device => { console.log('Funciona'); })
         .catch(error => { console.log(error); });
-});
