@@ -40,6 +40,7 @@ self.addEventListener('fetch', function(event) {
               // Check if we received a valid response
               if(!response || response.status !== 200 || response.type !== 'basic') {
                 return response;
+                console.log('Atualizou a pagina 1');
               }
   
               var responseToCache = response.clone();
@@ -47,8 +48,10 @@ self.addEventListener('fetch', function(event) {
               caches.open(CACHE_NAME)
                 .then(function(cache) {
                   cache.put(event.request, responseToCache);
+                  console.log('Atualizou a pagina 2');
                 });
   
+                console.log('Atualizou a pagina 3');
               return response;
             }
           );
