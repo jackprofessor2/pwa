@@ -59,7 +59,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = ['cache-name-v1'];
+    var cacheWhitelist = ['cache-name-v1', 'cache-name-v2'];
   
     event.waitUntil(
       caches.keys().then(function(cacheNames) {
@@ -72,25 +72,4 @@ self.addEventListener('activate', function(event) {
         );
       })
     );
-});
-
-button.addEventListener('pointerup', function(event) {
-    navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
-    .then(device => device.gatt.connect())
-    .then(server => {
-    // Getting Battery Service...
-    return server.getPrimaryService('battery_service');
-    })
-    .then(service => {
-    // Getting Battery Level Characteristic...
-    return service.getCharacteristic('battery_level');
-    })
-    .then(characteristic => {
-    // Reading Battery Level...
-    return characteristic.readValue();
-    })
-    .then(value => {
-    console.log('Battery percentage is ' + value.getUint8(0));
-    })
-    .catch(error => { console.log(error); });
 });
