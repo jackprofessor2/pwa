@@ -11,19 +11,3 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
-
-navigator.bluetooth.requestDevice({ filters: [{ name: 'Francois robot' }] })
-.then(device => {
-  // Set up event listener for when device gets disconnected.
-  device.addEventListener('gattserverdisconnected', onDisconnected);
-
-  // Attempts to connect to remote GATT Server.
-  return device.gatt.connect();
-})
-.then(server => { /* ... */ })
-.catch(error => { console.log(error); });
-
-function onDisconnected(event) {
-  let device = event.target;
-  console.log('Device ' + device.name + ' is disconnected.');
-}
