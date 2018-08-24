@@ -1,9 +1,4 @@
 /** scripts.js */
-var button = document.getElementById('bluetooth');
-button.addEventListener('click', function(r) {
-    window.alert('Evento disparado', r.responseText);
-});
-
 /*
 button.addEventListener('pointerup', function(event) {
     navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
@@ -31,6 +26,13 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('sw.js').then(function(registration) {
         // Registration was successful
+
+        var button = document.getElementById('bluetooth');
+
+        button.addEventListener('click', function(r) {
+            window.alert('Evento disparado', r.responseText);
+        });
+
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
       }).catch(function(err) {
         // registration failed :(
