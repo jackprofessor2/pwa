@@ -1,8 +1,31 @@
 /** scripts.js */
 var button = document.getElementById('bluetooth');
-button.addEventListener('pointerup', function(event) {
-    window.alert('Testando...');
+button.addEventListener('click', function(r) {
+    window.alert('Evento disparado', r.responseText);
 });
+
+/*
+button.addEventListener('pointerup', function(event) {
+    navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+    .then(device => device.gatt.connect())
+    .then(server => {
+    // Getting Battery Service...
+    return server.getPrimaryService('battery_service');
+    })
+    .then(service => {
+    // Getting Battery Level Characteristic...
+    return service.getCharacteristic('battery_level');
+    })
+    .then(characteristic => {
+    // Reading Battery Level...
+    return characteristic.readValue();
+    })
+    .then(value => {
+    console.log('Battery percentage is ' + value.getUint8(0));
+    })
+    .catch(error => { console.log(error); });
+});
+*/
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
