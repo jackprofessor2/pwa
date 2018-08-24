@@ -1,7 +1,7 @@
 /** scripts.js */
 var button = document.getElementById('bluetooth');
-button.addEventListener('click', function(event) {
-    window.alert('Testando...', event);
+button.addEventListener('pointerup', function(event) {
+    window.alert('Testando...');
 });
 
 if ('serviceWorker' in navigator) {
